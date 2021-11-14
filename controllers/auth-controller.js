@@ -28,6 +28,35 @@ const register = async(req, res, next) => {
     }
 }
 
+const login = async(req, res, next) => {
+    try {
+        const { username, password } = req.body
+        const user = await db.User.findOne({
+            where: {
+                username,
+            },
+        })
+        if (user) {
+            const isPassword = bcrypt.compareSync(password, user.password)
+            user.password = undefined
+            if (isPassword) {
+                res.json({
+                    success: true,
+                    message: "Login Success!",
+                    data: user,
+                })
+            } else {
+                throw ApiError.badRequest(`The password for the username ${username} is incorrect!`)
+            }
+        } else {
+            throw ApiError.badRequest("Username not found!")
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
-    register
+    register,
+    login
 }
