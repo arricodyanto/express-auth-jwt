@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const ApiError = require('../helpers/api-error')
+const authJwt = require('../helpers/auth-jwt')
 const saltRounds = 10
 const db = require('./../db/models')
 
@@ -17,7 +18,6 @@ const register = async(req, res, next) => {
             success: true,
             message: "Success Registering a New User !",
             data: insertData
-
         })
     } catch (error) {
         if (error.message === 'Validation error') {
@@ -40,10 +40,17 @@ const login = async(req, res, next) => {
             const isPassword = bcrypt.compareSync(password, user.password)
             user.password = undefined
             if (isPassword) {
-                res.json({
+                const payload = {
+                    username: user.username,
+                    id: user.id,
+                    email: user.email,
+                    role: user.role
+                }
+                const token = authJwt.generate(payload)
+                return res.json({
                     success: true,
                     message: "Login Success!",
-                    data: user,
+                    data: { user, token },
                 })
             } else {
                 throw ApiError.badRequest(`The password for the username ${username} is incorrect!`)
@@ -52,6 +59,7 @@ const login = async(req, res, next) => {
             throw ApiError.badRequest("Username not found!")
         }
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

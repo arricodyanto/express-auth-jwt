@@ -16,6 +16,13 @@ app.get('/', (req, res) => {
 
 app.use(errorHandler)
 
+app.use((req, res, next) => {
+    res.status(404).json({
+        success: false,
+        message: "Sorry URL not found!"
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server app running at http://localhost:${port}`)
 })
