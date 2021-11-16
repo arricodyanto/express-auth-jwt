@@ -8,7 +8,7 @@ Endpoint
 - /users (GET) : to show all user that has been already registered (need token authorization)
 
 Instalasi
-1. Edit port db to 5430 in .env file
+1. Edit port db to 5432 in .env file
 2. Create database
 ```sh
 npx sequelize-cli db:create
