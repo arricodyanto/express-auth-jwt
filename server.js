@@ -1,10 +1,11 @@
 const express = require('express')
-const { Sequelize } = require('sequelize');
-
 const errorHandler = require('./middlewares/error-handler')
 const app = express()
 const port = process.env.PORT || 3000
 const routers = require('./routes')
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize(`postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`) // Example for postgres
+
 
 app.use(express.json())
 app.use(routers)
