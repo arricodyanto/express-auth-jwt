@@ -8,8 +8,16 @@ Endpoint
 - /users (GET) : to show all user that has been already registered (need token authorization)
 
 Instalasi
-1. Edit port db to 5432 in .env file
-2. Create database
+1. Edit .env file:
+```sh
+DB_USERNAME=postgres
+DB_PASSWORD=password
+DB_NAME=demo-auth-jwt
+DB_HOST=127.0.0.1
+DB_PORT=5432
+JWT_SECRET=Zx-5qkTJaxYxR2UGXT8WzJ0Aqioa9ctLer6feBXMPQ0
+```
+3. Create database
 ```sh
 npx sequelize-cli db:create
 ```
