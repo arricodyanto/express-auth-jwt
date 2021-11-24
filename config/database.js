@@ -7,10 +7,10 @@ module.exports = {
         database: process.env.DB_NAME,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
-        ssl: {
-            rejectUnathorized: false
-        },
-        dialect: "postgres"
+        dialect: "postgres",
+        dialectOptions: {
+            ssl: true
+        }
     },
     test: {
         username: process.env.DB_USERNAME,
@@ -18,9 +18,7 @@ module.exports = {
         database: process.env.DB_NAME,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
-        ssl: {
-            rejectUnathorized: false
-        },
+        sslmode: require,
         dialect: "postgres"
     },
     production: {
@@ -29,9 +27,7 @@ module.exports = {
         database: process.env.DB_NAME,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
-        ssl: {
-            rejectUnathorized: false
-        },
+        sslmode: require,
         dialect: "postgres"
     }
 }
