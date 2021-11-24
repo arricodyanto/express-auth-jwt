@@ -7,7 +7,12 @@ Endpoint
 - /users/profile (GET) : to show user detail that currently login (need token authorization)
 - /users (GET) : to show all user that has been already registered (need token authorization)
 
-Instalasi
+Heroku App
+```sh
+https://express-auth-jwt.herokuapp.com/
+```
+
+Local Installation
 1. Edit .env file:
 ```sh
 DB_USERNAME=postgres
@@ -24,9 +29,4 @@ npx sequelize-cli db:create
 3. Migration database
 ```sh
 npx sequelize-cli db:migrate
-```
-
-or
-```sh
-npx sequelize-cli db:seed:all
 ```
